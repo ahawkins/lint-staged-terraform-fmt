@@ -5,12 +5,12 @@ set -euo pipefail
 # XXX: https://github.com/hashicorp/terraform/issues/19442
 #
 # This script shims the prettier interface and terraform fmt interface until
-# terraform has native support.  Terraform fmt takes a directory as a single
+# terraform has native support. Terraform fmt takes a directory as a single
 # argument. This does not work because the Terraform files are spread out
 # across multiple directories and we only want to format staged files.
 #
-# This script takes a list of files, copies them to a directory, terraform fmt
-# that directory then copies them back to the original location.
+# This script takes a list of files, then pipes each to terraform fmt, then
+# copies the original file.
 
 main() {
   local scratch
