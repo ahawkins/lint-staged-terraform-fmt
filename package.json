@@ -1,0 +1,39 @@
+{
+  "name": "lint-staged-terraform-fmt",
+  "version": "0.1.0",
+  "description": "'terraform fmt' for lint-staged",
+  "main": "index.js",
+  "repository": "https://github.com/ahawkins/lint-staged-terraform-fmt",
+  "author": "Adam Hawkins",
+  "license": "MIT",
+  "private": false,
+  "bin": {
+    "lint-staged-terraform-fmt": "lint-staged-terraform-fmt"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "husky": "^4.3.5",
+    "prettier": "^2.2.1",
+    "prettier-plugin-sh": "^0.6.0"
+  },
+  "scripts": {
+    "check": "bin/lint-staged-terraform-fmt"
+  },
+  "lint-staged": {
+    "*.{tf,tfvars}": "yarn --slient check",
+    "bin/*": "shellcheck",
+    "*": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {
+    "lint-staged": "^10.5.3"
+  }
+}
